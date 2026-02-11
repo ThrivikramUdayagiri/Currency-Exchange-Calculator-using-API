@@ -2,32 +2,44 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Currency Converter - All Currencies</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: #0f172a;
     color: white;
     text-align: center;
-    padding: 40px;
+    padding: 20px;
+    margin: 0;
 }
 
 .container {
     background: #1e293b;
-    padding: 30px;
+    padding: 25px;
     border-radius: 12px;
-    width: 380px;
+    width: 100%;
+    max-width: 420px;
     margin: auto;
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
+h2 {
+    margin-bottom: 15px;
+}
+
 input, select, button {
-    width: 92%;
-    padding: 10px;
-    margin: 10px;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
     border-radius: 8px;
     border: none;
+    font-size: 16px;
 }
 
 button {
@@ -42,8 +54,44 @@ button:hover {
 }
 
 .result {
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 18px;
+    word-wrap: break-word;
+}
+
+/* Mobile Small Screens */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 18px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    input, select, button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .result {
+        font-size: 16px;
+    }
+}
+
+/* Large Laptop Screens */
+@media (min-width: 900px) {
+    .container {
+        max-width: 500px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
 }
 </style>
 </head>
@@ -67,7 +115,6 @@ button:hover {
 const fromSelect = document.getElementById("fromCurrency");
 const toSelect = document.getElementById("toCurrency");
 
-// Load all currencies on page load
 window.onload = async function () {
     let res = await fetch("https://open.er-api.com/v6/latest/USD");
     let data = await res.json();
